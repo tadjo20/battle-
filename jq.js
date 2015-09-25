@@ -17,16 +17,50 @@ $(document).ready(function () {
 
     }
     function showComputerGuesses(computermoves){
+        cpxy = computermoves;
         console.log("comp guess");
-        for(i = 0; i < computermoves.length; i++){
 
-            console.log("from compare  " + playermoves[i] + "  "+ computermoves[i]);
+        var i = 0;                     //  set your counter to 1
+
+        function myLoop () {           //  create a loop function
+            setTimeout(function () {    //  call a 3s setTimeout when the loop is called
+                compcirclrmover(cpxy[i]);          //  your code here
+                i++;                     //  increment the counter
+                if (i < 4) {            //  if the counter < 10, call the loop function
+                    myLoop();             //  ..  again which will trigger another
+                }                        //  ..  setTimeout()
+            }, 3000)
         }
+
+        myLoop();                      //  start the loop
+
+
+        //
+        //for(i = 0; i < computermoves.length; i++){
+        //
+        //    console.log("from compare  " + cpxy + "  cpxy, also i"+ i);
+        //    //$.wait(compcirclrmover(cpxy[i]),5000);
+        //    var f = compcirclrmover(cpxy[i]);
+        //    setTimeout( f ,5000);
+        //    //setInterval(compcirclrmover(cpxy[i]), 5000);
+        //    //compcirclrmover(cpxy[i]);
+        //    setTimeout(msg,1000);
+        //}
+
+
+    }
+    function msg(){console.log("from delay")}
+    function compcirclrmover(xy){
+        var xcord = xy[0];
+        var ycord = xy[1];
+        //console.log("circle mover   "+  xy +" xcord  "+ ycord);
         $("#computerCircle").css({
             "visibility": "visible",
             "position": "absolute",
-            "left": "100px" ,
-            "top": "100px",
+            "left": xcord ,
+            "top": ycord,
+            //"left": location.xcord ,
+            //"top": location.ycord,
             "background-color": "red"
         });
     }
@@ -88,7 +122,7 @@ $(document).ready(function () {
 
                 computerMove(recMoves);
                 showComputerGuesses(compMoves);
-                compare(recMoves, compMoves);
+               // compare(recMoves, compMoves);
 
             }
 
