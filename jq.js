@@ -5,11 +5,33 @@ $(document).ready(function () {
     var recMoves = [];
     var compMoves = [];
 
-    function compare(){
-        console.log("from compare");
+    function compare(playermoves, computermoves){
+
+        //console.log("from compare" + playermoves[0] + "  "+ computermoves[0]);
+
+        for(i = 0; i < computermoves.length; i++){
+
+            console.log("from compare  " + playermoves[i] + "  "+ computermoves[i]);
+        }
+
+
+    }
+    function showComputerGuesses(computermoves){
+        console.log("comp guess");
+        for(i = 0; i < computermoves.length; i++){
+
+            console.log("from compare  " + playermoves[i] + "  "+ computermoves[i]);
+        }
+        $("#computerCircle").css({
+            "visibility": "visible",
+            "position": "absolute",
+            "left": "100px" ,
+            "top": "100px",
+            "background-color": "red"
+        });
     }
     function computerMove(recMoves){
-        console.log("from computer moves  " + recMoves);
+       // console.log("from computer moves  " + recMoves);
         for( var comindex = 0 ; comindex < recMoves.length ; comindex++ ){
             console.log(" comp loop");
             playFieldWidth = $("#playground").innerWidth();
@@ -22,10 +44,10 @@ $(document).ready(function () {
             var compXposition = ((Math.random() * (playOffsetX + playFieldWidth)) + playOffsetX).toFixed(1);
             var compYposition = ((Math.random() * (playOffsetY + playFieldLength)) + playOffsetY).toFixed(1);
 
-            console.log( compXposition + "  " + compYposition );
-            compMoves.push(compXposition,compYposition );
+           // console.log( compXposition + "  " + compYposition );
+            compMoves.push([compXposition,compYposition] );
         }
-     console.log(compMoves);
+     //console.log(compMoves);
     }
 
     $("#playground").click(function (e) {
@@ -65,7 +87,8 @@ $(document).ready(function () {
                 }
 
                 computerMove(recMoves);
-                compare();
+                showComputerGuesses(compMoves);
+                compare(recMoves, compMoves);
 
             }
 
